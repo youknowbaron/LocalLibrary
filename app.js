@@ -6,8 +6,19 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var catalogRouter = require('./routes/catalog');
+var wiki = require('./wiki.js');
 
 var app = express();
+
+// Set up database
+var mongoose = require('mongoose');
+
+const url = 'mongodb+srv://f4lavoxts:bachno1pro@cluster0-30eih.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(url, { useNewUrlParser: true });
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/catalog', catalogRouter);
+app.use('/wiki', wiki);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -39,19 +52,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-
-var mongoose = require('mongoose');
-
-const url = 'mongodb+srv://f4lavoxts:bachno1pro@cluster0-30eih.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(url, { useNewUrlParser: true });
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-var Schema = mongoose.Schema;
-var SomeModelSchema = new Schema({
-  a_string: String,
-  a_date: Date
-})
-
-var SomeModel = mongoose.model('SomeModel', SomeModelSchema);
