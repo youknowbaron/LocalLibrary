@@ -18,8 +18,8 @@ var BookInstance = require('./models/bookinstance')
 
 
 var mongoose = require('mongoose');
-const dev_url = 'mongodb+srv://f4lavoxts:bachno1pro@cluster0-bba28.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(dev_url, { useNewUrlParser: true });
+var mongoDB = userArgs[0];
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
