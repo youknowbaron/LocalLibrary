@@ -18,7 +18,7 @@ app.use(helmet());
 // Set up database
 var mongoose = require('mongoose');
 
-const dev_url = 'mongodb+srv://f4lavoxts:bachno1pro@cluster0-30eih.mongodb.net/test?retryWrites=true&w=majority';
+const dev_url = 'mongodb+srv://f4lavoxts:bachno1pro@cluster0-bba28.mongodb.net/test?retryWrites=true&w=majority';
 var url = process.env.MONGODB_URI || dev_url;
 mongoose.connect(url, { useNewUrlParser: true });
 
